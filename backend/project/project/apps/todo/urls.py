@@ -11,7 +11,11 @@ router.register(
 
 urlpatterns = [
     path(
-        "",
+        "api/",
         include(router.urls),
     ),
+    path(
+        "todo",
+        views.TodoView.as_view()
+    )
 ]

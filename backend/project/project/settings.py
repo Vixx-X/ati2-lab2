@@ -81,6 +81,7 @@ TEMPLATES = [
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
             str(BASE_DIR / "project" / "templates"),
+            str(BASE_DIR / "../frontend/build"),
         ],
         "OPTIONS": {
             "context_processors": [
@@ -145,6 +146,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 STATIC_URL = "static/"
 STATIC_ROOT = str(BASE_DIR / "static")
+STATICFILES_DIRS = [str(BASE_DIR / "../frontend/build")]
 
 
 # Default primary key field type
@@ -159,7 +161,12 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.SessionAuthentication",
     ),
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
-    "PAGE_SIZE": 20,
+    "DEFAULT_FILTER_BACKENDS": [
+        "rest_framework.filters.SearchFilter",
+        "rest_framework.filters.OrderingFilter",
+        "django_filters.rest_framework.DjangoFilterBackend",
+    ],
+    "PAGE_SIZE": 25,
 }
 
 

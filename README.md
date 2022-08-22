@@ -1,6 +1,6 @@
-# SOAP-REST-DJANGO
+# ATI2 Lab2
 
-Example of SOAP and REST app in django
+Example of a todo CRUD using DRF and Ract in django
 
 Installation tested on Ubuntu 20.04.1 LTS.
 

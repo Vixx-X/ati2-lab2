@@ -17,6 +17,13 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.shortcuts import redirect
+
+def redirect_view(request):
+    """
+    Common redirect view
+    """
+    return redirect("/todo")
 
 urlpatterns = [
     # admin
@@ -26,4 +33,10 @@ urlpatterns = [
         "",
         include(("project.apps.todo.urls", "project.apps.todo")),
     ),
+    # redirect
+    path(
+        "",
+        redirect_view,
+        name="redirect",
+    )
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
