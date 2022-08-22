@@ -56,7 +56,7 @@ function setup_venv {
 # alias for common developer commnads
 alias runserver="python3 ${DJANGO_DIR}/project/manage.py runserver"
 alias runclient="yarn --cwd ${REACT_DIR} start"
-alias run="runserver & runclient && fg"
+alias run='runserver & runclient && fg; fg'
 alias migrate="python3 ${DJANGO_DIR}/project/manage.py migrate"
 alias makemigrations="python3 ${DJANGO_DIR}/project/manage.py makemigrations"
 alias venv="source ${VENVDIR}/bin/activate"

@@ -40,6 +40,7 @@ export default function TaskForm({ task, open, handleClose }: TaskFormProps) {
   const initialValues = {
     name: task?.name ?? "",
     description: task?.description ?? "",
+    responsable: task?.responsable ?? "",
     importance: task?.importance ?? "Low",
     marked: task?.marked ?? false,
   };
@@ -70,6 +71,13 @@ export default function TaskForm({ task, open, handleClose }: TaskFormProps) {
             placeholder={"description"}
             multiline
             maxRows={15}
+          />
+
+          <Field
+            label={"assigned to"}
+            name="responsable"
+            id="responsable"
+            placeholder={"responsable"}
           />
 
           <Select

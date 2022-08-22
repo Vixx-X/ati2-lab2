@@ -27,10 +27,16 @@ class Task(models.Model):
         (MID, _("Mid importance")),
         (HIGH, _("High importance")),
     )
+
     importance = models.CharField(
+        _("Task importance"),
         max_length=32,
         choices=importance_choices,
         default=MID,
+    )
+
+    responsable = models.EmailField(
+        _("Task responsable"),
     )
 
     marked = models.BooleanField(

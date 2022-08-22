@@ -55,6 +55,7 @@ INSTALLED_APPS = [
 
     ## 3rd parties ##
     'rest_framework',
+    'django_filters',
     'crispy_forms',
 
     # cors

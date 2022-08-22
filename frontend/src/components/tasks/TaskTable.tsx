@@ -34,6 +34,7 @@ enum ImportanceType {
   MID = "Mid",
   HIGH = "High",
 }
+
 type Order = "asc" | "desc";
 
 function importanceLabel(importance: ImportanceType) {
@@ -76,6 +77,12 @@ const headCells: readonly HeadCell[] = [
     numeric: false,
     disablePadding: false,
     label: "Importance",
+  },
+  {
+    id: "responsable",
+    numeric: false,
+    disablePadding: false,
+    label: "Assigned to",
   },
   {
     id: "date_created",
@@ -482,6 +489,7 @@ export default function TaskTable() {
                             size={"medium"}
                           />
                         </TableCell>
+                        <TableCell>{row.responsable}</TableCell>
                         <TableCell>
                           {new Date(row.date_created).toLocaleString()}
                         </TableCell>
@@ -523,7 +531,7 @@ export default function TaskTable() {
                       <TableRow key={"detail"}>
                         <TableCell
                           style={{ paddingBottom: 0, paddingTop: 0 }}
-                          colSpan={6}
+                          colSpan={7}
                         >
                           <Collapse
                             in={isItemOpened}
@@ -538,7 +546,7 @@ export default function TaskTable() {
                               >
                                 Description
                               </Typography>
-                              <p style={{ "white-space": "pre-line" } as any}>
+                              <p style={{ whiteSpace: "pre-line" }}>
                                 {row.description}
                               </p>
                               <Typography
@@ -564,7 +572,7 @@ export default function TaskTable() {
                       height: 53,
                     }}
                   >
-                    <TableCell colSpan={6} />
+                    <TableCell colSpan={7} />
                   </TableRow>
                 )}
               </TableBody>

@@ -16,6 +16,7 @@ export interface TaskType {
   name: string;
   description: string;
   importance: ImportanceType;
+  responsable: string;
   marked: boolean;
   date_created?: string;
   date_completed?: string;

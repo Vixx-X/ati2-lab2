@@ -2,7 +2,8 @@ from django.views.generic.base import TemplateView
 from rest_framework import viewsets
 
 from .serializers import TaskSerializer
-from project.apps.todo.models import Task
+from .models import Task
+from .filters import TaskFilter
 
 
 class TaskViewSet(viewsets.ModelViewSet):
@@ -14,6 +15,8 @@ class TaskViewSet(viewsets.ModelViewSet):
     serializer_class = TaskSerializer
     ordering_fields = "__all__"
     ordering = ["date_created"]
+    filterset_class = TaskFilter
+    search_fields = ["name", "description", "responsable"]
 
 
 class TodoView(TemplateView):
