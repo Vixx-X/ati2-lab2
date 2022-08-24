@@ -23,7 +23,8 @@
     "react-dom": "^18.2.0",
     "react-paginate": "^8.1.2",
     "react-scripts": "5.0.1",
-    "swr": "^1.1.2"
+    "swr": "^1.1.2",
+    "zustand": "^4.0.0-rc.1"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^3.1.1",

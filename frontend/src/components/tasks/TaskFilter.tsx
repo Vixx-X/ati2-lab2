@@ -9,6 +9,7 @@ import Form from "components/forms/Form";
 import Select from "components/forms/Select";
 import SubmitButton from "components/forms/SubmitButton";
 import { FormikValues } from "formik";
+import useTranslate from "hooks/useTranslate";
 import { TaskFilterType } from "types/tasks";
 
 interface TaskFormProps {
@@ -17,43 +18,44 @@ interface TaskFormProps {
   open: boolean;
   handleClose: any;
 }
-
-const markedChoices = [
-  {
-    text: "None (Neither)",
-    value: "none",
-  },
-  {
-    text: "Not done",
-    value: "false",
-  },
-  {
-    text: "Already Done",
-    value: "true",
-  },
-];
-
-const importanceChoices = [
-  {
-    text: "Lower",
-    value: "Low",
-  },
-  {
-    text: "Middle",
-    value: "Mid",
-  },
-  {
-    text: "High",
-    value: "High",
-  },
-];
-
 export default function TaskFilter({
   filter,
   setFilter,
   open,
   handleClose,
 }: TaskFormProps) {
+  const t = useTranslate();
+
+  const markedChoices = [
+    {
+      text: t("none (neither)"),
+      value: "none",
+    },
+    {
+      text: t("not done"),
+      value: "false",
+    },
+    {
+      text: t("already done"),
+      value: "true",
+    },
+  ];
+
+  const importanceChoices = [
+    {
+      text: t("lower"),
+      value: "Low",
+    },
+    {
+      text: t("middle"),
+      value: "Mid",
+    },
+    {
+      text: t("high"),
+      value: "High",
+    },
+  ];
+
   const initialValues = {
     importance: filter?.importance ?? [],
     marked: filter?.marked ?? "none",
@@ -76,29 +78,29 @@ export default function TaskFilter({
       <Form initialValues={initialValues} onSubmit={handleSubmit}>
         <DialogContent>
           <Select
-            label={"importance"}
+            label={t("importance")}
             name="importance"
             id="importance"
-            placeholder={"importance"}
+            placeholder={t("importance")}
             choices={importanceChoices}
             multiple
           />
 
           <Select
-            label={"done"}
+            label={t("done")}
             name="marked"
             id="marked"
-            placeholder={"marked"}
+            placeholder={t("marked")}
             choices={markedChoices}
           />
 
           <DateTimeField
-            label={"start date"}
+            label={t("start date")}
             name="date_start"
             id="date_start"
           />
 
-          <DateTimeField label={"end date"} name="date_end" id="date_end" />
+          <DateTimeField label={t("end date")} name="date_end" id="date_end" />
         </DialogContent>
         <DialogActions>
           <Box
@@ -106,8 +108,8 @@ export default function TaskFilter({
             className="gap-x-4"
             justifyContent="space-between"
           >
-            <Button onClick={handleClose}>Cancel</Button>
-            <SubmitButton>Filter</SubmitButton>
+            <Button onClick={handleClose}>{t("cancel")}</Button>
+            <SubmitButton>{t("filter")}</SubmitButton>
           </Box>
         </DialogActions>
       </Form>

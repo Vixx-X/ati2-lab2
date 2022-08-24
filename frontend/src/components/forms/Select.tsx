@@ -1,6 +1,7 @@
 import { FormControl, InputLabel, MenuItem } from "@mui/material";
 import SSelect from "@mui/material/Select";
 import { useFormikContext } from "formik";
+import useTranslate from "hooks/useTranslate";
 import recursiveGetter from "utils/recursiveGetter";
 
 interface SelectProps extends Props {
@@ -24,9 +25,11 @@ export const Select = ({
     setFieldValue(name, value);
   };
 
+  const t = useTranslate();
+
   return (
     <FormControl className="w-full">
-      {!noPlaceholder && <InputLabel>{placeholder ?? "Select"}</InputLabel>}
+      {!noPlaceholder && <InputLabel>{placeholder ?? t("select")}</InputLabel>}
       <SSelect
         value={recursiveGetter(vals, name)}
         onChange={handleChange}

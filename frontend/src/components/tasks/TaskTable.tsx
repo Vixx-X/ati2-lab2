@@ -24,6 +24,7 @@ import { alpha } from "@mui/material/styles";
 import { visuallyHidden } from "@mui/utils";
 import Loader from "components/Loader";
 import { deleteTask, getTasks, patchTask } from "fetches/tasks";
+import useTranslate from "hooks/useTranslate";
 import * as React from "react";
 import { useState } from "react";
 import useSWR from "swr";
@@ -40,13 +41,14 @@ type Order = "asc" | "desc";
 function importanceLabel(importance: ImportanceType) {
   switch (importance) {
     case ImportanceType.LOW:
-      return "Lower";
+      return "lower";
     case ImportanceType.MID:
-      return "Mild";
+      return "mild";
     case ImportanceType.HIGH:
-      return "Important";
+      return "important";
   }
 }
+
 function importanceColor(importance: ImportanceType) {
   switch (importance) {
     case ImportanceType.LOW:
@@ -70,31 +72,31 @@ const headCells: readonly HeadCell[] = [
     id: "name",
     numeric: false,
     disablePadding: true,
-    label: "Name",
+    label: "name",
   },
   {
     id: "importance",
     numeric: false,
     disablePadding: false,
-    label: "Importance",
+    label: "importance",
   },
   {
     id: "responsable",
     numeric: false,
     disablePadding: false,
-    label: "Assigned to",
+    label: "assigned to",
   },
   {
     id: "date_created",
     numeric: false,
     disablePadding: false,
-    label: "Date",
+    label: "date",
   },
   {
     id: "marked",
     numeric: false,
     disablePadding: false,
-    label: "Done",
+    label: "done",
   },
 ];
 
@@ -124,6 +126,7 @@ function EnhancedTableHead(props: EnhancedTableProps) {
       onRequestSort(event, property);
     };
 
+  const t = useTranslate();
   return (
     <TableHead>
       <TableRow>
@@ -150,7 +153,7 @@ function EnhancedTableHead(props: EnhancedTableProps) {
               direction={orderBy === headCell.id ? order : "asc"}
               onClick={createSortHandler(headCell.id)}
             >
-              {headCell.label}
+              {t(headCell.label)}
               {orderBy === headCell.id ? (
                 <Box component="span" sx={visuallyHidden}>
                   {order === "desc" ? "sorted descending" : "sorted ascending"}
@@ -180,6 +183,7 @@ const EnhancedTableToolbar = ({
   deleteAll,
   markAll,
 }: EnhancedTableToolbarProps) => {
+  const t = useTranslate();
   return (
     <Toolbar
       sx={{
@@ -201,7 +205,7 @@ const EnhancedTableToolbar = ({
           variant="subtitle1"
           component="div"
         >
-          {numSelected} selected
+          {t("{0} selected", numSelected)}
         </Typography>
       ) : (
         <Typography
@@ -210,12 +214,12 @@ const EnhancedTableToolbar = ({
           id="tableTitle"
           component="div"
         >
-          Todo List
+          {t("todo list")}
         </Typography>
       )}
       {numSelected > 0 ? (
         <>
-          <Tooltip title="Done all task">
+          <Tooltip title={t("done all task")}>
             <IconButton
               onClick={() => {
                 markAll();
@@ -224,7 +228,7 @@ const EnhancedTableToolbar = ({
               <DoneAllIcon />
             </IconButton>
           </Tooltip>
-          <Tooltip title="Delete">
+          <Tooltip title={t("delete")}>
             <IconButton
               onClick={() => {
                 deleteAll();
@@ -236,7 +240,7 @@ const EnhancedTableToolbar = ({
         </>
       ) : (
         <>
-          <Tooltip title="Create task">
+          <Tooltip title={t("create task")}>
             <IconButton
               onClick={() => {
                 handleOpen();
@@ -245,7 +249,7 @@ const EnhancedTableToolbar = ({
               <AddIcon />
             </IconButton>
           </Tooltip>
-          <Tooltip title="Filter list">
+          <Tooltip title={t("filter")}>
             <IconButton
               onClick={() => {
                 handleFilter();
@@ -277,6 +281,8 @@ export default function TaskTable() {
     return ret;
   }, getTasks);
   const isLoading = !data && !error;
+
+  const t = useTranslate();
 
   const [selected, setSelected] = useState<readonly number[]>([]);
   const [opened, setOpened] = useState<readonly number[]>([]);
@@ -483,7 +489,7 @@ export default function TaskTable() {
                         </TableCell>
                         <TableCell>
                           <Chip
-                            label={importanceLabel(row.importance)}
+                            label={t(importanceLabel(row.importance))}
                             variant="outlined"
                             color={importanceColor(row.importance)}
                             size={"medium"}
@@ -505,7 +511,7 @@ export default function TaskTable() {
                         </TableCell>
                         <TableCell>
                           <>
-                            <Tooltip title="Edit">
+                            <Tooltip title={t("edit")}>
                               <IconButton
                                 onClick={(event) => {
                                   event.stopPropagation();
@@ -515,7 +521,7 @@ export default function TaskTable() {
                                 <EditIcon />
                               </IconButton>
                             </Tooltip>
-                            <Tooltip title="Delete">
+                            <Tooltip title={t("delete")}>
                               <IconButton
                                 onClick={(event) => {
                                   event.stopPropagation();
@@ -586,6 +592,7 @@ export default function TaskTable() {
             page={params.offset / params.limit}
             onPageChange={handleChangePage}
             onRowsPerPageChange={handleChangeRowsPerPage}
+            labelRowsPerPage={t("rows per page:")}
           />
         </Paper>
       </Box>
