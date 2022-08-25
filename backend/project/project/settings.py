@@ -150,11 +150,15 @@ TIME_ZONE = "America/Caracas"
 USE_I18N = True
 USE_TZ = True
 
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 STATIC_URL = "static/"
 STATIC_ROOT = str(BASE_DIR / "static")
-STATICFILES_DIRS = [str(BASE_DIR / "../frontend/build")]
+STATICFILES_DIRS = [
+    str(BASE_DIR / "../frontend/build"),
+    str(BASE_DIR / "../frontend/build/static"),
+]
 
 
 # Default primary key field type
