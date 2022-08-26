@@ -198,7 +198,7 @@ const EnhancedTableToolbar = ({
         }),
       }}
     >
-      {numSelected > 0 ? (
+      {numSelected > 0 && (
         <Typography
           sx={{ flex: "1 1 100%" }}
           color="inherit"
@@ -206,15 +206,6 @@ const EnhancedTableToolbar = ({
           component="div"
         >
           {t("{0} selected", numSelected)}
-        </Typography>
-      ) : (
-        <Typography
-          sx={{ flex: "1 1 100%" }}
-          variant="h2"
-          id="tableTitle"
-          component="div"
-        >
-          {t("todo list")}
         </Typography>
       )}
       {numSelected > 0 ? (
@@ -431,7 +422,7 @@ export default function TaskTable() {
     <>
       {isLoading && <Loader />}
       <Box sx={{ width: "100%" }}>
-        <Paper sx={{ width: "100%", mb: 2 }}>
+        <Paper sx={{ width: "100%", mb: 2, borderRadius:"10px"}}>
           <EnhancedTableToolbar
             numSelected={selected.length}
             handleOpen={handleForm}
@@ -458,9 +449,8 @@ export default function TaskTable() {
                   const isItemSelected = isSelected(row.id);
                   const isItemOpened = isOpened(row.id);
                   const labelId = `table-checkbox-${index}`;
-
                   return (
-                    <>
+                    <React.Fragment key={row.id}>
                       <TableRow
                         hover
                         onClick={(event) => handleClick(event, row.id)}
@@ -569,7 +559,7 @@ export default function TaskTable() {
                           </Collapse>
                         </TableCell>
                       </TableRow>
-                    </>
+                    </React.Fragment>
                   );
                 })}
                 {data?.results > 0 && (

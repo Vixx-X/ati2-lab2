@@ -34,7 +34,7 @@ export default function LanguageSelect() {
 
   return (
     <Form initialValues={initVal} onSubmit={handleChange} autoSubmit>
-      <Select choices={langs} name="lang" placeholder={t("change language")} />
+      <Select choices={langs} name="lang" noPlaceholder sx={{ py: "0.5rem" }} />
     </Form>
   );
 }

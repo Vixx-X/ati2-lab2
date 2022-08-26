@@ -59,12 +59,12 @@ export default function TaskForm({ task, open, handleClose }: TaskFormProps) {
   };
 
   return (
-    <Dialog open={open} onClose={handleClose}>
+    <Dialog open={open} onClose={handleClose} sx={{minWidth: "30rem"}}>
       <DialogTitle>
         {!edit ? t("create new task") : t("edit {0} task", task?.name)}
       </DialogTitle>
       <Form initialValues={initialValues} onSubmit={handleSubmit}>
-        <DialogContent>
+        <DialogContent className="flex flex-col gap-y-4 w-full">
           <Field
             label={t("name")}
             name="name"
