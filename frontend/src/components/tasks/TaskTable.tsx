@@ -293,7 +293,7 @@ export default function TaskTable() {
   const [task, setTask] = useState<TaskType | undefined>(undefined);
 
   const handleRequestSort = (
-    event: React.MouseEvent<unknown>,
+    _: React.MouseEvent<unknown>,
     property: keyof TaskType
   ) => {
     const isAsc = orderBy === property && order === "asc";
@@ -409,7 +409,7 @@ export default function TaskTable() {
     setSelected(newSelected);
   };
 
-  const handleChangePage = (event: unknown, newPage: number) => {
+  const handleChangePage = (_: unknown, newPage: number) => {
     setParams((prev) => ({ ...prev, offset: prev.limit * newPage }));
     setSelected([]);
     mutate();

@@ -14,8 +14,5 @@ urlpatterns = [
         "api/",
         include(router.urls),
     ),
-    path(
-        "todo",
-        views.TodoView.as_view()
-    )
+    path("todo", views.TodoView.as_view()),
 ]

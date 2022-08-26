@@ -16,9 +16,8 @@ export const CheckboxField = ({
 }: CheckboxFieldProps) => {
   const { values, setFieldValue } = useFormikContext();
   const vals: any = values;
-  const handleChange = (e: any) => {
-    const value = e.target.value;
-    setFieldValue(name, value);
+  const handleChange = () => {
+    setFieldValue(name, !recursiveGetter(vals, name));
   };
 
   return (
