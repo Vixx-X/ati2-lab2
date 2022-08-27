@@ -1,6 +1,5 @@
-import { Form as FForm, Formik, FormikConfig, FormikValues } from 'formik';
-
-import AutoSubmit from './AutoSubmit';
+import AutoSubmit from "./AutoSubmit";
+import { Form as FForm, Formik, FormikConfig, FormikValues } from "formik";
 
 interface FormProps extends FormikConfig<FormikValues> {
   autoSubmit?: boolean;

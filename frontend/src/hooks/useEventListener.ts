@@ -1,9 +1,9 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
 export default function useEventListener(
   eventType: string,
   callback: Function,
-  element: any = typeof window !== 'undefined' ? window.document : null
+  element: any = typeof window !== "undefined" ? window.document : null
 ) {
   const callbackRef = useRef(callback);
 

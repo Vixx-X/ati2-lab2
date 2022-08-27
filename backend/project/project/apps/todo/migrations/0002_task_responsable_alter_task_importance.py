@@ -6,19 +6,30 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('todo', '0001_initial'),
+        ("todo", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='task',
-            name='responsable',
-            field=models.EmailField(default='a@b.com', max_length=254, verbose_name='Task responsable'),
+            model_name="task",
+            name="responsable",
+            field=models.EmailField(
+                default="a@b.com", max_length=254, verbose_name="Task responsable"
+            ),
             preserve_default=False,
         ),
         migrations.AlterField(
-            model_name='task',
-            name='importance',
-            field=models.CharField(choices=[('Low', 'Low importance'), ('Mid', 'Mid importance'), ('High', 'High importance')], default='Mid', max_length=32, verbose_name='Task importance'),
+            model_name="task",
+            name="importance",
+            field=models.CharField(
+                choices=[
+                    ("Low", "Low importance"),
+                    ("Mid", "Mid importance"),
+                    ("High", "High importance"),
+                ],
+                default="Mid",
+                max_length=32,
+                verbose_name="Task importance",
+            ),
         ),
     ]
