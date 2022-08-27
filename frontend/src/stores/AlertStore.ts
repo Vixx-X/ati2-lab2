@@ -3,7 +3,7 @@ import create from "zustand";
 import _create from "zustand/vanilla";
 
 const DELETE_TIME_ALERT = 5000;
-const MAX_ID_LIMIT = 10000
+const MAX_ID_LIMIT = 10000;
 
 interface Alert {
   id: string;
@@ -19,10 +19,10 @@ interface AlertStore {
 
 export const _alertStore = _create<AlertStore>()((set, get) => ({
   alerts: [],
-  removeAlert: (id:string) => {
-    set((state)=>({
-        alerts:state.alerts.filter((item)=>(item.id !== id))
-    }))
+  removeAlert: (id: string) => {
+    set((state) => ({
+      alerts: state.alerts.filter((item) => item.id !== id),
+    }));
   },
   addAlerts: (severity: AlertColor, text: string) => {
     const alert = {
@@ -31,14 +31,11 @@ export const _alertStore = _create<AlertStore>()((set, get) => ({
       text: text,
     };
     set((state) => ({
-      alerts: [
-        ...state.alerts,
-        alert
-      ],
+      alerts: [...state.alerts, alert],
     }));
-    setTimeout(()=>{
-        get().removeAlert(alert.id)
-    },DELETE_TIME_ALERT)
+    setTimeout(() => {
+      get().removeAlert(alert.id);
+    }, DELETE_TIME_ALERT);
   },
 }));
 

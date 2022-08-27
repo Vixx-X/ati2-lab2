@@ -255,14 +255,17 @@ const EnhancedTableToolbar = ({
   );
 };
 
-interface ParamsType extends TaskFilterType {
+export interface ParamsType extends TaskFilterType {
   limit: number;
   offset: number;
   [key: string]: any;
 }
 
 export default function TaskTable() {
-  const [params, setParams] = useState<ParamsType>({ limit: 25, offset: 0 });
+  const [params, setParams] = useState<ParamsType>({
+    limit: 25,
+    offset: 0,
+  });
   const { data, error, mutate } = useSWR(() => {
     const ret = { ...params };
     ret.importance =
@@ -422,7 +425,7 @@ export default function TaskTable() {
     <>
       {isLoading && <Loader />}
       <Box sx={{ width: "100%" }}>
-        <Paper sx={{ width: "100%", mb: 2, borderRadius:"10px"}}>
+        <Paper sx={{ width: "100%", mb: 2, borderRadius: "10px" }}>
           <EnhancedTableToolbar
             numSelected={selected.length}
             handleOpen={handleForm}

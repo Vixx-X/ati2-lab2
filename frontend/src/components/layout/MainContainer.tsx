@@ -21,7 +21,7 @@ export default function MainContainer({ children }: any) {
             variant="h6"
             noWrap
             component="div"
-            sx={{ textTransform: "uppercase", ml: "2rem"}}
+            sx={{ textTransform: "uppercase", ml: "2rem" }}
           >
             {t("TO DO LIST")}
           </Typography>

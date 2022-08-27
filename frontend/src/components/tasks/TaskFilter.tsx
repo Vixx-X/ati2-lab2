@@ -1,9 +1,12 @@
+import DeleteIcon from "@mui/icons-material/Delete";
 import { Button } from "@mui/material";
 import Box from "@mui/material/Box";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
 import DateTimeField from "components/forms/Datetime";
 import Form from "components/forms/Form";
 import Select from "components/forms/Select";
@@ -18,6 +21,7 @@ interface TaskFormProps {
   open: boolean;
   handleClose: any;
 }
+
 export default function TaskFilter({
   filter,
   setFilter,
@@ -56,11 +60,20 @@ export default function TaskFilter({
     },
   ];
 
+  const cleanFilter = () => {
+    setFilter((prev: any) => ({
+      limit: prev.limit,
+      offset: prev.offset,
+      reset: !prev?.reset,
+    }));
+  };
+
   const initialValues = {
     importance: filter?.importance ?? [],
     marked: filter?.marked ?? "none",
     date_start: filter?.date_start ?? null,
     date_end: filter?.date_end ?? null,
+    reset: filter?.reset,
   };
 
   const handleSubmit = async (values: FormikValues) => {
@@ -74,7 +87,12 @@ export default function TaskFilter({
 
   return (
     <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>Filters</DialogTitle>
+      <DialogTitle>{t("filters")}</DialogTitle>
+      <Tooltip title={t("clear filter")}>
+        <IconButton onClick={() => cleanFilter()}>
+          <DeleteIcon />
+        </IconButton>
+      </Tooltip>
       <Form initialValues={initialValues} onSubmit={handleSubmit}>
         <DialogContent>
           <Select
