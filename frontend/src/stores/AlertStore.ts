@@ -5,7 +5,7 @@ import _create from "zustand/vanilla";
 const DELETE_TIME_ALERT = 5000;
 const MAX_ID_LIMIT = 10000;
 
-interface Alert {
+export interface Alert {
   id: string;
   severity: AlertColor;
   text: string;

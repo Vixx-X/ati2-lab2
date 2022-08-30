@@ -12,8 +12,8 @@ import SubmitButton from "components/forms/SubmitButton";
 import { postTask, putTask } from "fetches/tasks";
 import { FormikValues } from "formik";
 import useTranslate from "hooks/useTranslate";
-import alertStore from "stores/AlertStore";
 import { TaskType } from "types/tasks";
+import Alert from "utils/alert";
 
 interface TaskFormProps {
   task?: TaskType;
@@ -23,7 +23,6 @@ interface TaskFormProps {
 
 export default function TaskForm({ task, open, handleClose }: TaskFormProps) {
   const t = useTranslate();
-  const Alert = alertStore((state) => state.addAlerts);
   const importanceChoices = [
     {
       text: t("low"),
