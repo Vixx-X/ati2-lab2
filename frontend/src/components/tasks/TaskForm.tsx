@@ -57,9 +57,16 @@ export default function TaskForm({ task, open, handleClose }: TaskFormProps) {
       setStatus(exception.data);
     }
   };
+  const styles = {
+    '& .MuiPaper-root': {
+      minWidth: "fit-content",
+      width: "90%",
+      maxWidth: "40rem",
+    },
+  }
 
   return (
-    <Dialog open={open} onClose={handleClose} sx={{minWidth: "30rem"}}>
+    <Dialog open={open} onClose={handleClose} sx={styles}>
       <DialogTitle>
         {!edit ? t("create new task") : t("edit {0} task", task?.name)}
       </DialogTitle>
@@ -85,7 +92,7 @@ export default function TaskForm({ task, open, handleClose }: TaskFormProps) {
             label={t("assigned to")}
             name="responsable"
             id="responsable"
-            placeholder={t("responsable")}
+            placeholder={t("place assigned person email")}
           />
 
           <Select
