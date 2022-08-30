@@ -133,7 +133,7 @@ function EnhancedTableHead(props: EnhancedTableProps) {
   return (
     <TableHead>
       <TableRow>
-        <TableCell padding="checkbox">
+        <TableCell>
           <Checkbox
             color="primary"
             indeterminate={numSelected > 0 && numSelected < rowCount}
@@ -224,8 +224,23 @@ const EnhancedTableToolbar = ({
           </Tooltip>
           <Tooltip title={t("delete")}>
             <IconButton
-              onClick={() => {
-                deleteAll();
+              onClick={(event) => {
+                event.stopPropagation();
+                Dialog(
+                  t("are you sure you want to delete all tasks?"),
+                  t("this operation is not reversable"),
+                  [
+                    {
+                      title: t("cancel"),
+                    },
+                    {
+                      onClick: () => {
+                        deleteAll()
+                      },
+                      title: t("confirm"),
+                    },
+                  ]
+                );
               }}
             >
               <DeleteIcon />
@@ -427,6 +442,7 @@ export default function TaskTable() {
   const styles = {
     "& .tooltip": {
       visibility: "hidden",
+      width: "fit-content",
     },
     "&:hover": {
       "& .tooltip": {
@@ -483,7 +499,7 @@ export default function TaskTable() {
                                   "& > *": { borderBottom: "unset" },
                                 }}
                               >
-                                <TableCell padding="checkbox">
+                                <TableCell>
                                   <Checkbox
                                     color="primary"
                                     checked={isItemSelected}
@@ -528,7 +544,7 @@ export default function TaskTable() {
                                     }
                                   />
                                 </TableCell>
-                                <TableCell>
+                                <TableCell sx={{ padding: 0 }}>
                                   <Box className="tooltip">
                                     <Tooltip title={t("edit")}>
                                       <IconButton
@@ -582,29 +598,50 @@ export default function TaskTable() {
                                     timeout="auto"
                                     unmountOnExit
                                   >
-                                    <Box sx={{ margin: 1 }}>
-                                      <Typography
-                                        variant="h6"
-                                        gutterBottom
-                                        component="div"
-                                      >
-                                        Description
-                                      </Typography>
-                                      <p style={{ whiteSpace: "pre-line" }}>
-                                        {row.description}
-                                      </p>
-                                      <Typography
-                                        variant="h6"
-                                        gutterBottom
-                                        component="div"
-                                      >
-                                        Date Completed
-                                      </Typography>
-                                      <p>
-                                        {new Date(
-                                          row.date_completed
-                                        ).toLocaleString()}
-                                      </p>
+                                    <Box
+                                      className="flex justify-between gap-x-10 px-10 py-5"
+                                      sx={{ margin: 1 }}
+                                    >
+                                      <Box>
+                                        <Typography
+                                          variant="h6"
+                                          gutterBottom
+                                          component="div"
+                                          color="primary"
+                                          sx={{
+                                            fontWeight: "bold",
+                                            fontSize: "1.2rem",
+                                            marginBottom: 0,
+                                          }}
+                                        >
+                                          Description
+                                        </Typography>
+                                        <p style={{ whiteSpace: "pre-line" }}>
+                                          {row.description}
+                                        </p>
+                                      </Box>
+                                      {row.marked && (
+                                        <Box>
+                                          <Typography
+                                            variant="h6"
+                                            gutterBottom
+                                            component="div"
+                                            color="primary"
+                                            sx={{
+                                              fontWeight: "bold",
+                                              fontSize: "1.2rem",
+                                              marginBottom: 0,
+                                            }}
+                                          >
+                                            Date Completed
+                                          </Typography>
+                                          <p>
+                                            {new Date(
+                                              row.date_completed
+                                            ).toLocaleString()}
+                                          </p>
+                                        </Box>
+                                      )}
                                     </Box>
                                   </Collapse>
                                 </TableCell>
