@@ -1,5 +1,5 @@
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -68,6 +68,14 @@ export default function TaskFilter({
     }));
   };
 
+  const styles = {
+    "& .MuiPaper-root": {
+      minWidth: "fit-content",
+      width: "90%",
+      maxWidth: "40rem",
+    },
+  };
+
   const initialValues = {
     importance: filter?.importance ?? [],
     marked: filter?.marked ?? "none",
@@ -86,15 +94,17 @@ export default function TaskFilter({
   };
 
   return (
-    <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>{t("filters")}</DialogTitle>
-      <Tooltip title={t("clear filter")}>
-        <IconButton onClick={() => cleanFilter()}>
-          <DeleteIcon />
-        </IconButton>
-      </Tooltip>
+    <Dialog open={open} onClose={handleClose} sx={styles}>
+      <Box className="flex justify-between" sx={{ padding: "16px 24px" }}>
+        <DialogTitle sx={{ padding: 0 }}>{t("filters")}</DialogTitle>
+        <Tooltip title={t("clear filter")}>
+          <IconButton onClick={() => cleanFilter()}>
+            <DeleteIcon />
+          </IconButton>
+        </Tooltip>
+      </Box>
       <Form initialValues={initialValues} onSubmit={handleSubmit}>
-        <DialogContent>
+        <DialogContent className="flex flex-col gap-y-4 w-full">
           <Select
             label={t("importance")}
             name="importance"

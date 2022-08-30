@@ -8,7 +8,6 @@ import userStore from "stores/UserStore";
 export default function LanguageSelect() {
   const language = userStore((state: any) => state.lang);
   const setLanguage = userStore((state: any) => state.setLang);
-  const t = useTranslate();
 
   const handleChange = useCallback(
     (values: FormikValues) => {
@@ -32,9 +31,19 @@ export default function LanguageSelect() {
     },
   ];
 
+  const styles = {
+    alignItems: "center",
+    '& .MuiSelect-select': {
+      backgroundColor: "white",
+      paddingTop: "0.5rem",
+      paddingBottom: "0.5rem",
+    }
+  }
+
+
   return (
     <Form initialValues={initVal} onSubmit={handleChange} autoSubmit>
-      <Select choices={langs} name="lang" noPlaceholder sx={{ py: "0.5rem" }} />
+      <Select choices={langs} name="lang" noPlaceholder sx={styles} />
     </Form>
   );
 }

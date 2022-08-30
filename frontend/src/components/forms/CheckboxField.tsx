@@ -19,11 +19,17 @@ export const CheckboxField = ({
   const handleChange = () => {
     setFieldValue(name, !recursiveGetter(vals, name));
   };
+  const labelStyles = {
+    '&.MuiFormControlLabel-root': {
+      margin: 0
+    }
+  }
 
   return (
     <FormControlLabel
       className="w-full"
       label={label}
+      sx={labelStyles}
       control={
         <Checkbox
           checked={recursiveGetter(vals, name)}

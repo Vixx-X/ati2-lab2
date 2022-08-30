@@ -1,6 +1,7 @@
 import TaskFilter from "./TaskFilter";
 import TaskForm from "./TaskForm";
 import AddIcon from "@mui/icons-material/Add";
+import AssignmentIcon from "@mui/icons-material/Assignment";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
 import EditIcon from "@mui/icons-material/Edit";
@@ -127,6 +128,7 @@ function EnhancedTableHead(props: EnhancedTableProps) {
     };
 
   const t = useTranslate();
+
   return (
     <TableHead>
       <TableRow>
@@ -421,174 +423,215 @@ export default function TaskTable() {
   const isSelected = (id: number) => selected.indexOf(id) !== -1;
   const isOpened = (id: number) => opened.indexOf(id) !== -1;
 
+  const styles = {
+    "& .tooltip": {
+      visibility: "hidden",
+    },
+    "&:hover": {
+      "& .tooltip": {
+        visibility: "visible",
+      },
+    },
+  };
+
   return (
     <>
       {isLoading && <Loader />}
-      <Box sx={{ width: "100%" }}>
-        <Paper sx={{ width: "100%", mb: 2, borderRadius: "10px" }}>
-          <EnhancedTableToolbar
-            numSelected={selected.length}
-            handleOpen={handleForm}
-            deleteAll={handleDeleteAll}
-            markAll={handleMarkAll}
-            handleFilter={handleFilter}
-          />
-          <TableContainer>
-            <Table
-              sx={{ minWidth: 750 }}
-              aria-labelledby="tableTitle"
-              size={"medium"}
-            >
-              <EnhancedTableHead
-                numSelected={selected.length}
-                order={order}
-                orderBy={orderBy}
-                onSelectAllClick={handleSelectAllClick}
-                onRequestSort={handleRequestSort}
-                rowCount={data?.count ?? 0}
-              />
-              <TableBody>
-                {data?.results.map((row: Required<TaskType>, index: number) => {
-                  const isItemSelected = isSelected(row.id);
-                  const isItemOpened = isOpened(row.id);
-                  const labelId = `table-checkbox-${index}`;
-                  return (
-                    <React.Fragment key={row.id}>
-                      <TableRow
-                        hover
-                        onClick={(event) => handleClick(event, row.id)}
-                        tabIndex={-1}
-                        key={row.id}
-                        sx={{ "& > *": { borderBottom: "unset" } }}
-                      >
-                        <TableCell padding="checkbox">
-                          <Checkbox
-                            color="primary"
-                            checked={isItemSelected}
-                            aria-checked={isItemSelected}
-                            inputProps={{
-                              "aria-labelledby": labelId,
-                            }}
-                            onClick={(event) => handleSelect(event, row.id)}
-                          />
-                        </TableCell>
-                        <TableCell
-                          component="th"
-                          id={labelId}
-                          scope="row"
-                          padding="none"
-                        >
-                          {row.name}
-                        </TableCell>
-                        <TableCell>
-                          <Chip
-                            label={t(importanceLabel(row.importance))}
-                            variant="outlined"
-                            color={importanceColor(row.importance)}
-                            size={"medium"}
-                          />
-                        </TableCell>
-                        <TableCell>{row.responsable}</TableCell>
-                        <TableCell>
-                          {new Date(row.date_created).toLocaleString()}
-                        </TableCell>
-                        <TableCell padding="checkbox">
-                          <Checkbox
-                            color="success"
-                            checked={row.marked}
-                            inputProps={{
-                              "aria-labelledby": labelId,
-                            }}
-                            onClick={(event) => onChangeDone(event, row.id)}
-                          />
-                        </TableCell>
-                        <TableCell>
-                          <>
-                            <Tooltip title={t("edit")}>
-                              <IconButton
-                                onClick={(event) => {
-                                  event.stopPropagation();
-                                  handleForm(row);
-                                }}
-                              >
-                                <EditIcon />
-                              </IconButton>
-                            </Tooltip>
-                            <Tooltip title={t("delete")}>
-                              <IconButton
-                                onClick={(event) => {
-                                  event.stopPropagation();
-                                  handleDelete(row.id);
-                                }}
-                              >
-                                <DeleteIcon />
-                              </IconButton>
-                            </Tooltip>
-                          </>
-                        </TableCell>
-                      </TableRow>
-                      <TableRow key={"detail"}>
-                        <TableCell
-                          style={{ paddingBottom: 0, paddingTop: 0 }}
-                          colSpan={7}
-                        >
-                          <Collapse
-                            in={isItemOpened}
-                            timeout="auto"
-                            unmountOnExit
-                          >
-                            <Box sx={{ margin: 1 }}>
-                              <Typography
-                                variant="h6"
-                                gutterBottom
-                                component="div"
-                              >
-                                Description
-                              </Typography>
-                              <p style={{ whiteSpace: "pre-line" }}>
-                                {row.description}
-                              </p>
-                              <Typography
-                                variant="h6"
-                                gutterBottom
-                                component="div"
-                              >
-                                Date Completed
-                              </Typography>
-                              <p>
-                                {new Date(row.date_completed).toLocaleString()}
-                              </p>
-                            </Box>
-                          </Collapse>
-                        </TableCell>
-                      </TableRow>
-                    </React.Fragment>
-                  );
-                })}
-                {data?.results > 0 && (
-                  <TableRow
-                    style={{
-                      height: 53,
-                    }}
+      {data && (
+        <Box sx={{ width: "100%" }}>
+          <Paper sx={{ width: "100%", mb: 2, borderRadius: "10px" }}>
+            <EnhancedTableToolbar
+              numSelected={selected.length}
+              handleOpen={handleForm}
+              deleteAll={handleDeleteAll}
+              markAll={handleMarkAll}
+              handleFilter={handleFilter}
+            />
+
+            {data?.results.length > 0 ? (
+              <>
+                <TableContainer>
+                  <Table
+                    sx={{ minWidth: 750 }}
+                    aria-labelledby="tableTitle"
+                    size={"medium"}
                   >
-                    <TableCell colSpan={7} />
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
-            component="div"
-            count={data?.count ?? 0}
-            rowsPerPage={params.limit}
-            page={params.offset / params.limit}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-            labelRowsPerPage={t("rows per page:")}
-          />
-        </Paper>
-      </Box>
+                    <EnhancedTableHead
+                      numSelected={selected.length}
+                      order={order}
+                      orderBy={orderBy}
+                      onSelectAllClick={handleSelectAllClick}
+                      onRequestSort={handleRequestSort}
+                      rowCount={data?.count ?? 0}
+                    />
+                    <TableBody>
+                      {data?.results.map(
+                        (row: Required<TaskType>, index: number) => {
+                          const isItemSelected = isSelected(row.id);
+                          const isItemOpened = isOpened(row.id);
+                          const labelId = `table-checkbox-${index}`;
+                          return (
+                            <React.Fragment key={row.id}>
+                              <TableRow
+                                hover
+                                onClick={(event) => handleClick(event, row.id)}
+                                tabIndex={-1}
+                                key={row.id}
+                                sx={{
+                                  ...styles,
+                                  "& > *": { borderBottom: "unset" },
+                                }}
+                              >
+                                <TableCell padding="checkbox">
+                                  <Checkbox
+                                    color="primary"
+                                    checked={isItemSelected}
+                                    aria-checked={isItemSelected}
+                                    inputProps={{
+                                      "aria-labelledby": labelId,
+                                    }}
+                                    onClick={(event) =>
+                                      handleSelect(event, row.id)
+                                    }
+                                  />
+                                </TableCell>
+                                <TableCell
+                                  component="th"
+                                  id={labelId}
+                                  scope="row"
+                                  padding="none"
+                                >
+                                  {row.name}
+                                </TableCell>
+                                <TableCell>
+                                  <Chip
+                                    label={t(importanceLabel(row.importance))}
+                                    variant="outlined"
+                                    color={importanceColor(row.importance)}
+                                    size={"medium"}
+                                  />
+                                </TableCell>
+                                <TableCell>{row.responsable}</TableCell>
+                                <TableCell>
+                                  {new Date(row.date_created).toLocaleString()}
+                                </TableCell>
+                                <TableCell padding="checkbox">
+                                  <Checkbox
+                                    color="success"
+                                    checked={row.marked}
+                                    inputProps={{
+                                      "aria-labelledby": labelId,
+                                    }}
+                                    onClick={(event) =>
+                                      onChangeDone(event, row.id)
+                                    }
+                                  />
+                                </TableCell>
+                                <TableCell>
+                                  <Box className="tooltip">
+                                    <Tooltip title={t("edit")}>
+                                      <IconButton
+                                        onClick={(event) => {
+                                          event.stopPropagation();
+                                          handleForm(row);
+                                        }}
+                                      >
+                                        <EditIcon />
+                                      </IconButton>
+                                    </Tooltip>
+                                    <Tooltip title={t("delete")}>
+                                      <IconButton
+                                        onClick={(event) => {
+                                          event.stopPropagation();
+                                          handleDelete(row.id);
+                                        }}
+                                      >
+                                        <DeleteIcon />
+                                      </IconButton>
+                                    </Tooltip>
+                                  </Box>
+                                </TableCell>
+                              </TableRow>
+                              <TableRow key={"detail"}>
+                                <TableCell
+                                  style={{ paddingBottom: 0, paddingTop: 0 }}
+                                  colSpan={7}
+                                >
+                                  <Collapse
+                                    in={isItemOpened}
+                                    timeout="auto"
+                                    unmountOnExit
+                                  >
+                                    <Box sx={{ margin: 1 }}>
+                                      <Typography
+                                        variant="h6"
+                                        gutterBottom
+                                        component="div"
+                                      >
+                                        Description
+                                      </Typography>
+                                      <p style={{ whiteSpace: "pre-line" }}>
+                                        {row.description}
+                                      </p>
+                                      <Typography
+                                        variant="h6"
+                                        gutterBottom
+                                        component="div"
+                                      >
+                                        Date Completed
+                                      </Typography>
+                                      <p>
+                                        {new Date(
+                                          row.date_completed
+                                        ).toLocaleString()}
+                                      </p>
+                                    </Box>
+                                  </Collapse>
+                                </TableCell>
+                              </TableRow>
+                            </React.Fragment>
+                          );
+                        }
+                      )}
+                      {data?.results > 0 && (
+                        <TableRow
+                          style={{
+                            height: 53,
+                          }}
+                        >
+                          <TableCell colSpan={7} />
+                        </TableRow>
+                      )}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+                <TablePagination
+                  rowsPerPageOptions={[5, 10, 25]}
+                  component="div"
+                  count={data?.count ?? 0}
+                  rowsPerPage={params.limit}
+                  page={params.offset / params.limit}
+                  onPageChange={handleChangePage}
+                  onRowsPerPageChange={handleChangeRowsPerPage}
+                  labelRowsPerPage={t("rows per page:")}
+                />
+              </>
+            ) : (
+              <Box className="flex flex-col items-center justify-center py-32 px-5 w-full opacity-40 capitalize">
+                <AssignmentIcon
+                  color="primary"
+                  sx={{ fontSize: "15rem" }}
+                ></AssignmentIcon>
+                <p className="text-center">
+                  {t(
+                    "no tasks added yet. please select create button to add new task"
+                  )}
+                </p>
+              </Box>
+            )}
+          </Paper>
+        </Box>
+      )}
       <TaskForm task={task} open={open} handleClose={closeForm} />
       <TaskFilter
         open={filter}

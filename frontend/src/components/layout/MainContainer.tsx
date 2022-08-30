@@ -26,17 +26,8 @@ export default function MainContainer({ children }: any) {
             {t("TO DO LIST")}
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
+          <Box display="flex" alignItems="center">
             <LanguageSelect />
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-haspopup="true"
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
           </Box>
         </Toolbar>
       </AppBar>
@@ -45,7 +36,7 @@ export default function MainContainer({ children }: any) {
         sx={{
           width: "90%",
           margin: "10rem auto",
-          maxWidth: "calc(100vw - 240px)",
+          maxWidth: "80rem",
         }}
         className="w-full"
       >

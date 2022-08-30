@@ -36,6 +36,7 @@ export const Select = ({
         {...props}
         label={placeholder}
         sx={{
+          ...props.sx,
           display: "flex",
         }}
       >
