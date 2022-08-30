@@ -1,5 +1,5 @@
 {
-  "TO DO LIST": "LISTA DE COSAS POR HACER",
+  "TO DO LIST": "LISTA DE COSAS",
   "select": "seleccionar",
   "change language": "cambiar idioma",
   "create new task": "crear nueva tarea",
@@ -42,5 +42,6 @@
   "task succesfully created": "tarea creada correctamente",
   "task {0} succesfully edited": "tarea {0} editada correctamente",
   "are you sure you want to delete {0}?": "¿estás seguro que quieres eliminar {0}?",
+  "are you sure you want to delete all tasks?": "¿estás seguro que quieres eliminar toda las tareas?",
   "this operation is not reversable": "esta operación no es reversible"
 }
