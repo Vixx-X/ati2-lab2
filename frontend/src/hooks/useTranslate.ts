@@ -25,7 +25,7 @@ export default function useTranslate() {
       const dict = translationDict?.[lang];
       const found = dict?.[text];
       if (found === undefined && dict !== undefined) {
-        console.log(`Warning: ${text} was not translated`);
+        console.warn(`translation: '${text}' was not translated`);
       }
       const ret = found ?? text;
       if (!args) return ret;

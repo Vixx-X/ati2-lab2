@@ -1,4 +1,5 @@
 {
+  "TO DO LIST": "LISTA DE COSAS POR HACER",
   "select": "seleccionar",
   "change language": "cambiar idioma",
   "create new task": "crear nueva tarea",
@@ -27,11 +28,16 @@
   "edit": "editar",
   "cancel": "cancelar",
   "filter": "filtrar",
+  "filters": "filtros",
   "todo list": "lista todo",
   "create task": "crear tarea",
-  "done all": "marcar todo como hecho",
+  "no tasks added yet. please select create button to add new task": "ninguna tarea añadida aun. por favor seleccione el botón de crear para añadir una tarea nueva",
+  "done all task": "marcar todo como hecho",
   "delete": "eliminar",
+  "clear filter": "limpiar filter",
   "{0} selected": "{0} seleccionados",
   "date": "fecha",
-  "rows per page:": "filas por página:"
+  "rows per page:": "filas por página:",
+  "task succesfully created": "tarea creada correctamente",
+  "task {0} succesfully edited": "tarea {0} editada correctamente"
 }

@@ -9,6 +9,7 @@ export interface TaskFilterType {
   marked?: boolean;
   date_start?: string;
   date_end?: string;
+  reset?: boolean;
 }
 
 export interface TaskType {

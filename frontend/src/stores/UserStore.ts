@@ -6,7 +6,7 @@ interface UserState {
 }
 
 export const _userStore = _create<UserState>()((set) => ({
-  lang: "es",
+  lang: "en",
   setLang: (lang: string) => set({ lang }),
 }));
 

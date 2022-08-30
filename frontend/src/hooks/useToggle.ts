@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function useToggle(defaultValue: boolean) {
   const [value, setValue] = useState<boolean>(defaultValue);
@@ -6,7 +6,7 @@ export default function useToggle(defaultValue: boolean) {
   const toggleValue = (value: any) => {
     setValue((currentValue) =>
       // is checking value to toggle on undefined and cast non boolean
-      typeof value === 'boolean' ? value : !currentValue
+      typeof value === "boolean" ? value : !currentValue
     );
   };
 

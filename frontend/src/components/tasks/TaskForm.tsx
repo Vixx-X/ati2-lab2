@@ -12,6 +12,7 @@ import SubmitButton from "components/forms/SubmitButton";
 import { postTask, putTask } from "fetches/tasks";
 import { FormikValues } from "formik";
 import useTranslate from "hooks/useTranslate";
+import alertStore from "stores/AlertStore";
 import { TaskType } from "types/tasks";
 
 interface TaskFormProps {
@@ -22,6 +23,7 @@ interface TaskFormProps {
 
 export default function TaskForm({ task, open, handleClose }: TaskFormProps) {
   const t = useTranslate();
+  const Alert = alertStore((state) => state.addAlerts);
   const importanceChoices = [
     {
       text: t("low"),
@@ -52,6 +54,12 @@ export default function TaskForm({ task, open, handleClose }: TaskFormProps) {
       if (edit && task?.id) await putTask(task.id, values as TaskType);
       else await postTask(values as TaskType);
       setStatus({});
+      Alert(
+        "success",
+        !edit
+          ? t("task succesfully created")
+          : t("task {0} succesfully edited", task?.name)
+      );
       handleClose();
     } catch (exception: any) {
       setStatus(exception.data);
