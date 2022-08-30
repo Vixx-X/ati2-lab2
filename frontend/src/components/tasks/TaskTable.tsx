@@ -30,6 +30,7 @@ import * as React from "react";
 import { useState } from "react";
 import useSWR from "swr";
 import { TaskType, TaskFilterType } from "types/tasks";
+import Dialog from "utils/dialog";
 
 enum ImportanceType {
   LOW = "Low",
@@ -543,7 +544,26 @@ export default function TaskTable() {
                                       <IconButton
                                         onClick={(event) => {
                                           event.stopPropagation();
-                                          handleDelete(row.id);
+                                          Dialog(
+                                            t(
+                                              "are you sure you want to delete {0}?",
+                                              row.name
+                                            ),
+                                            t(
+                                              "this operation is not reversable"
+                                            ),
+                                            [
+                                              {
+                                                title: t("cancel"),
+                                              },
+                                              {
+                                                onClick: () => {
+                                                  handleDelete(row.id);
+                                                },
+                                                title: t("confirm"),
+                                              },
+                                            ]
+                                          );
                                         }}
                                       >
                                         <DeleteIcon />

@@ -13,7 +13,7 @@ export interface Alert {
 
 interface AlertStore {
   alerts: Alert[];
-  addAlerts: (severity: AlertColor, text: string) => void;
+  addAlert: (severity: AlertColor, text: string) => void;
   removeAlert: (id: string) => void;
 }
 
@@ -24,7 +24,7 @@ export const _alertStore = _create<AlertStore>()((set, get) => ({
       alerts: state.alerts.filter((item) => item.id !== id),
     }));
   },
-  addAlerts: (severity: AlertColor, text: string) => {
+  addAlert: (severity: AlertColor, text: string) => {
     const alert = {
       id: Math.floor(Math.random() * MAX_ID_LIMIT).toString(),
       severity: severity,

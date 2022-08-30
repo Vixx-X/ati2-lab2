@@ -27,6 +27,7 @@
   "create": "crear",
   "edit": "editar",
   "cancel": "cancelar",
+  "confirm": "confirmar",
   "filter": "filtrar",
   "filters": "filtros",
   "todo list": "lista todo",
@@ -39,5 +40,7 @@
   "date": "fecha",
   "rows per page:": "filas por página:",
   "task succesfully created": "tarea creada correctamente",
-  "task {0} succesfully edited": "tarea {0} editada correctamente"
+  "task {0} succesfully edited": "tarea {0} editada correctamente",
+  "are you sure you want to delete {0}?": "¿estás seguro que quieres eliminar {0}?",
+  "this operation is not reversable": "esta operación no es reversible"
 }
