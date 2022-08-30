@@ -30,6 +30,7 @@ import * as React from "react";
 import { useState } from "react";
 import useSWR from "swr";
 import { TaskType, TaskFilterType } from "types/tasks";
+import Alert from "utils/alert";
 import Dialog from "utils/dialog";
 
 enum ImportanceType {
@@ -235,7 +236,7 @@ const EnhancedTableToolbar = ({
                     },
                     {
                       onClick: () => {
-                        deleteAll()
+                        deleteAll();
                       },
                       title: t("confirm"),
                     },
@@ -315,16 +316,26 @@ export default function TaskTable() {
     setParams((prev) => ({ ...prev, ordering }));
   };
 
-  const handleDelete = async (id: number, noMutate: boolean = false) => {
+  const handleDelete = async (
+    id: number,
+    _mutate: boolean = true,
+    _alert: boolean = true
+  ) => {
     try {
       await deleteTask(id);
-    } catch (exception) {}
-    if (!noMutate) mutate();
+      if (_alert) Alert("success", t("the task was deleted succesfully"));
+    } catch (exception) {
+      Alert(
+        "error",
+        t("the task could not be deleted, please try again later")
+      );
+    }
+    if (_mutate) mutate();
   };
 
   const handleDeleteAll = () => {
     selected.forEach(async (id) => {
-      await handleDelete(id, true);
+      await handleDelete(id, false);
     });
     mutate();
   };
@@ -333,7 +344,13 @@ export default function TaskTable() {
     selected.forEach(async (id) => {
       try {
         await patchTask(id, { marked: true });
-      } catch (exception) {}
+        Alert("success", t("the task was edited succesfully"));
+      } catch (exception) {
+        Alert(
+          "error",
+          t("the task could not be deleted, please try again later")
+        );
+      }
     });
     mutate();
   };
@@ -353,7 +370,13 @@ export default function TaskTable() {
     const marked = event.target.checked;
     try {
       await patchTask(id, { marked });
-    } catch (exception) {}
+      Alert("success", t("the task was edited succesfully"));
+    } catch (exception) {
+      Alert(
+        "error",
+        t("the task could not be deleted, please try again later")
+      );
+    }
     mutate();
   };
 
@@ -614,7 +637,7 @@ export default function TaskTable() {
                                             marginBottom: 0,
                                           }}
                                         >
-                                          Description
+                                          {t("description")}
                                         </Typography>
                                         <p style={{ whiteSpace: "pre-line" }}>
                                           {row.description}
@@ -633,7 +656,7 @@ export default function TaskTable() {
                                               marginBottom: 0,
                                             }}
                                           >
-                                            Date Completed
+                                            {t("date completed")}
                                           </Typography>
                                           <p>
                                             {new Date(

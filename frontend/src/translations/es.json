@@ -38,10 +38,15 @@
   "clear filter": "limpiar filter",
   "{0} selected": "{0} seleccionados",
   "date": "fecha",
+  "date completed": "fecha en que se completó",
   "rows per page:": "filas por página:",
   "task succesfully created": "tarea creada correctamente",
   "task {0} succesfully edited": "tarea {0} editada correctamente",
   "are you sure you want to delete {0}?": "¿estás seguro que quieres eliminar {0}?",
   "are you sure you want to delete all tasks?": "¿estás seguro que quieres eliminar toda las tareas?",
-  "this operation is not reversable": "esta operación no es reversible"
+  "this operation is not reversable": "esta operación no es reversible",
+  "the task was edited succesfully": "se editó la tarea correctamente",
+  "the task could not be edited, please try again later": "no se pudo editar la tarea, por favor intente más tarde",
+  "the task was deleted succesfully": "se eliminó la tarea correctamente",
+  "the task could not be deleted, please try again later": "no se pudo eliminar la tarea, por favor intente más tarde"
 }
