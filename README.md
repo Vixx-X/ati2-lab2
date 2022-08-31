@@ -1,6 +1,6 @@
 # ATI2 Lab2
 
-Example of a todo CRUD using DRF and Ract in django
+Example of a todo CRUD using DRF and React in django
 
 Installation tested on Ubuntu 20.04.1 LTS.
 
