@@ -12,7 +12,6 @@ Installation tested on Ubuntu 20.04.1 LTS.
 - [Create and activate virtual enviroment and install python dependencies](#setup-venv)
 - [Setup de Database](#setup-db)
 - [Start the server](#start-server)
-- [Testing](#test)
 - [References](#references)
 
 ## Steps by Virtual env <a name="virtualenv"></a>
@@ -39,12 +38,6 @@ This method is tested to work on linux, and is the most confortable for developi
 ### Create .env file <a name="create-env"></a>
 
 Edit `.env.example` with your own settings and rename it `.env`
-For the SECRET_KEY, one can generate it using `django shell`:
-
-```python
-from django.core.management.utils import get_random_secret_key
-get_random_secret_key()
-```
 
 ### Setup dev enviroment <a name="setup-dev-env"></a>
 
@@ -66,13 +59,17 @@ setup_db
 
 ### Start the server <a name="start-server"></a>
 
-Run the development server
+Run the development server (django and react)
+
+```bash
+run
+```
+
+Or run the production server (only django with static react)
 
 ```bash
 runserver
 ```
-
-### Test the setup <a name="test"></a>
 
 ## References <a name="references"></a>
 
