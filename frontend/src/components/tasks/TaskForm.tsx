@@ -26,15 +26,15 @@ export default function TaskForm({ task, open, handleClose }: TaskFormProps) {
   const importanceChoices = [
     {
       text: t("low"),
-      value: "Low",
+      value: "LOW",
     },
     {
       text: t("middle"),
-      value: "Mid",
+      value: "MID",
     },
     {
       text: t("high"),
-      value: "High",
+      value: "HIGH",
     },
   ];
 
@@ -65,12 +65,12 @@ export default function TaskForm({ task, open, handleClose }: TaskFormProps) {
     }
   };
   const styles = {
-    '& .MuiPaper-root': {
+    "& .MuiPaper-root": {
       minWidth: "fit-content",
       width: "90%",
       maxWidth: "40rem",
     },
-  }
+  };
 
   return (
     <Dialog open={open} onClose={handleClose} sx={styles}>

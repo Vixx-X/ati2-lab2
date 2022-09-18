@@ -48,15 +48,15 @@ export default function TaskFilter({
   const importanceChoices = [
     {
       text: t("lower"),
-      value: "Low",
+      value: "LOW",
     },
     {
       text: t("middle"),
-      value: "Mid",
+      value: "MID",
     },
     {
       text: t("high"),
-      value: "High",
+      value: "HIGH",
     },
   ];
 

@@ -1,0 +1,32 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// url      = env("DATABASE_URL")
+datasource db {
+  provider           = "postgresql"
+  url                = "postgresql://admin:1234@localhost:5432/ati2_lab2"
+  shadowDatabaseUrl  = "postgresql://admin:1234@localhost:5432/ati2_lab2_shadow"
+}
+
+generator client {
+  provider        = "prisma-client-js"
+}
+
+model Task {
+  id               Int        @id @default(autoincrement())
+  name             String
+  description      String
+  importance       Importance @default(MID)
+  responsable      String
+  marked           Boolean    @default(false)
+  date_created     DateTime   @default(now())
+  date_completed   DateTime?  @updatedAt
+
+  @@index([importance, marked, date_created])
+}
+
+enum Importance {
+  LOW
+  MID
+  HIGH
+}

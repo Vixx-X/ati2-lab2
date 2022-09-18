@@ -9,7 +9,7 @@ export async function assertApiError(resp: any) {
   // Attach extra info to the error object.
 
   throw Object.assign({}, error, {
-    data: resp.data,
+    data: resp.data.errors,
     status: resp.status,
   } as ClientApiError);
 }
