@@ -13,9 +13,7 @@ const app = express();
  * App Configuration
  */
 
-app.get("/", (req: Request, res: Response) => {
-  res.json({ status: "API is running on /api" });
-});
+app.use(express.static(path.join(__dirname, "../../frontend/build")));
 
 const allowedOrigins = [
   "https://ati2.lab2.vittorioadesso.com",
@@ -73,5 +71,5 @@ app.use(
  */
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
-  console.info(`server up on port ${PORT}`);
+  console.info(`server up in http://localhost:${PORT}`);
 });
