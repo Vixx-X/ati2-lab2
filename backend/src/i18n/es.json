@@ -1,0 +1,6 @@
+{
+  "this field should not be blank": "este campo no debe estar vacío",
+  "ID is wrong": "ID no está bien",
+  "resource not found": "recurso no encontrado",
+  "this field should be an email": "este campo debe ser un email"
+}

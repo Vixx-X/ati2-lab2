@@ -44,7 +44,7 @@ export default function TaskForm({ task, open, handleClose }: TaskFormProps) {
     name: task?.name ?? "",
     description: task?.description ?? "",
     responsable: task?.responsable ?? "",
-    importance: task?.importance ?? "Low",
+    importance: task?.importance ?? "LOW",
     marked: task?.marked ?? false,
   };
 

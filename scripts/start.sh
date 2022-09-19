@@ -53,12 +53,12 @@ alias runclient="yarn --cwd ${FRONT_DIR} start"
 alias run='runserver & runclient && fg; fg'
 
 function help {
-    echo "runserver      - run django server"
+    echo "runserver      - run express server"
     echo "runclient      - run react server"
     echo "run            - run django and react server"
     echo ""
-    echo "setup_venv     - initial venv and pip install the project"
-    echo "setup_db       - initial setup, migrate and createsuperuser on Postgres DB"
+    echo "setup_venv     - initial install dependencies of the project"
+    echo "setup_db       - initial setup and migrate on Postgres DB"
 }
 
 echo "All done!"
