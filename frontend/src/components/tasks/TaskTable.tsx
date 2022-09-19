@@ -34,9 +34,9 @@ import Alert from "utils/alert";
 import Dialog from "utils/dialog";
 
 enum ImportanceType {
-  LOW = "Low",
-  MID = "Mid",
-  HIGH = "High",
+  LOW = "LOW",
+  MID = "MID",
+  HIGH = "HIGH",
 }
 
 type Order = "asc" | "desc";

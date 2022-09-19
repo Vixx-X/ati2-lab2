@@ -1,6 +1,6 @@
 # ATI2 Lab2
 
-Example of a todo CRUD using DRF and React in django
+Example of a todo CRUD using Express and React
 
 Installation tested on Ubuntu 20.04.1 LTS.
 
@@ -9,7 +9,7 @@ Installation tested on Ubuntu 20.04.1 LTS.
 - [Install pre-installation dependencies](#install-pre-installation-dependencies)
 - [Create .env file](#create-env)
 - [Setup dev enviroment](#setup-dev-env)
-- [Create and activate virtual enviroment and install python dependencies](#setup-venv)
+- [Install yarn dependencies](#setup-venv)
 - [Setup de Database](#setup-db)
 - [Start the server](#start-server)
 - [References](#references)
@@ -20,19 +20,17 @@ This method is tested to work on linux, and is the most confortable for developi
 
 ### Install pre-installation dependencies <a name="install-pre-installation-dependencies"></a>
 
-- Python3
-  Should come preinstalled with Ubuntu
-
-- Pip3
+- Yarn and node
   Installation on Ubuntu
-  `sudo apt install python3-venv python3-pip`
+  `curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - `
+
+  `echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list`
+
+  `sudo apt update && sudo apt install yarn`
 
 - Postgres
   If done with docker this work with example settings
-  
   `docker run --name postgres -e POSTGRES_PASSWORD=1234 -p 5432:5432 -d postgres`
-  
-  `sudo apt-get install libpq-dev` (needed by psycopg2)
 
   You can also try to install it normally
   `sudo apt-get install libpq-dev postgresql-12`
@@ -47,7 +45,7 @@ Edit `.env.example` with your own settings and rename it `.env`
 source ./scripts/start.sh
 ```
 
-### Create and activate virtual enviroment and install python dependencies <a name="setup-venv"></a>
+### Install yarn dependencies <a name="setup-venv"></a>
 
 ```bash
 setup_venv
@@ -61,13 +59,13 @@ setup_db
 
 ### Start the server <a name="start-server"></a>
 
-Run the development server (django and react)
+Run the development server (express and react)
 
 ```bash
 run
 ```
 
-Or run the production server (only django with static react)
+Or run the production server (only express with static react)
 
 ```bash
 runserver
@@ -75,7 +73,7 @@ runserver
 
 ## References <a name="references"></a>
 
-- [Steps followed to setup django with postgreSQL][postgres]
-- [Directory structure explanation](https://stackoverflow.com/questions/22841764/best-practice-for-django-project-working-directory-structure)
+- [Steps followed to setup yarn][yarn]
 
 [postgres]: https://www.digitalocean.com/community/tutorials/how-to-use-postgresql-with-your-django-application-on-ubuntu-14-04
+[yarn]: https://classic.yarnpkg.com/lang/en/docs/install/#debian-stable

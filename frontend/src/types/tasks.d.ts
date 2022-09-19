@@ -1,7 +1,7 @@
 export enum ImportanceType {
-  LOW = "Low",
-  MID = "Mid",
-  HIGH = "High",
+  LOW = "LOW",
+  MID = "MID",
+  HIGH = "HIGH",
 }
 
 export interface TaskFilterType {
