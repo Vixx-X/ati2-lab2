@@ -1,6 +1,10 @@
 # ATI2 Lab2
 
-Example of a todo CRUD using Express and React
+Example of a SPA todo CRUD using React
+
+Backend options are [EXPRESS][express-branch] and [DJANGO][django-branch], you could look at each one in its respective branch.
+
+In the `main` branch we offer EXPRESS.
 
 Installation tested on Ubuntu 20.04.1 LTS.
 
@@ -77,3 +81,5 @@ runserver
 
 [postgres]: https://www.digitalocean.com/community/tutorials/how-to-use-postgresql-with-your-django-application-on-ubuntu-14-04
 [yarn]: https://classic.yarnpkg.com/lang/en/docs/install/#debian-stable
+[django-branch]: https://github.com/Vixx-X/ati2-lab2/tree/django
+[express-branch]: https://github.com/Vixx-X/ati2-lab2/tree/express
